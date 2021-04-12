@@ -26,7 +26,6 @@ from colorama import Fore, Back, Style
 
 init(convert=True)
 
-content = urllib.request.urlopen("AUTH_API (AUTH.GG)")
 
 def chunks(lst, n):
     for i in range(0, len(lst), n):
@@ -113,23 +112,6 @@ def profile_attack(proxies):
         if (k == 5): print()
         i = i + 1
 
-def check():
-    os.system('title Starting...')
-    print(Fore.MAGENTA + '[ TRY ] ' + Fore.WHITE + 'Request to AUTH.GG/ID' + '"' + str(hwid()) + '"')
-    print(" ")
-    a = content.read()
-    b = GetUUID()
-    time.sleep(1)
-    if b in a:
-        print(Fore.LIGHTGREEN_EX + '[ SUCCESS ] ' + Fore.WHITE + 'HWID FOUND')
-        time.sleep(2)
-        main()
-    else:
-        print(Fore.LIGHTRED_EX + '[ ERROR ] ' + Fore.WHITE + 'We can''t find your HWID in our database. Please join: discord')
-        print(Fore.LIGHTYELLOW_EX + '[ INFO ] ' + Fore.WHITE + 'Your HWID: ' + str(hwid()))
-        os.system('PAUSE')
-
-
 
 
 def main():
@@ -184,7 +166,7 @@ def main():
 if __name__ == "__main__":
     print_logo()
     try:
-        check()
+        main()
         print(Style.RESET_ALL)
     except KeyboardInterrupt:
         print("\n\n" + Fore.RED + "[*] Program is closing!")
