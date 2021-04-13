@@ -7,6 +7,7 @@ from os import path
 import urllib
 import requests
 
+from proxybroker import Broker
 from colorama import Fore, init
 import time
 import os
@@ -16,6 +17,38 @@ from multiprocessing import Process
 from colorama import Fore, Back, Style
 
 init(convert=True)
+
+async def show(proxies, proxy_list):
+    while (len(proxy_list) < 50):
+        proxy = await proxies.get()
+        if proxy is None: break
+
+        print_success("[" + str(len(proxy_list) + 1) + "/50]", "Proxy bulundu:", proxy.as_json()["host"] + ":" + str(proxy.as_json()["port"]))
+        
+        proxy_list.append(
+            proxy.as_json()["host"] + ":" + str(proxy.as_json()["port"])
+        )
+
+        pass
+    pass
+
+
+def find_proxies():
+    proxy_list = []
+    proxies = asyncio.Queue()
+    broker = Broker(proxies)
+    tasks = asyncio.gather(
+        broker.find(
+            types=['HTTPS'], limit=50), show(proxies, proxy_list)
+        )
+
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(tasks)
+    
+    if (len(proxy_list) % 5 != 0 and len(proxy_list) > 5):
+        proxy_list = proxy_list[:len(proxy_list) - (len(proxy_list) % 5)]
+
+    return proxy_list
 
 
 page_headers = {
