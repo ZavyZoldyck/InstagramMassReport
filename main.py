@@ -8,13 +8,8 @@ import urllib
 import requests
 
 from colorama import Fore, init
-from libs.utils import print_success
-from libs.utils import print_error
 import time
-from libs.utils import ask_question
 import os
-from libs.utils import print_status
-from libs.utils import parse_proxy_file
 from libs.proxy_harvester import find_proxies
 from libs.attack import report_profile_attack
 from libs.attack import report_video_attack
@@ -24,7 +19,61 @@ from colorama import Fore, Back, Style
 
 init(convert=True)
 
-init(convert=True)
+def print_success(message, *argv):
+    print(Fore.GREEN + "[ IMR | SUCCESS ] " + Style.RESET_ALL + Style.BRIGHT, end="")
+    print(message, end=" ")
+    for arg in argv:
+        print(arg, end=" ")
+    print("")
+
+def print_error(message, *argv):
+    print(Fore.RED + "[ IMR | FAILED ] " + Style.RESET_ALL + Style.BRIGHT, end="")
+    print(message, end=" ")
+    for arg in argv:
+        print(arg, end=" ")
+    print("")
+
+def print_status(message, *argv):
+    print(Fore.BLUE + "[ * ] " + Style.RESET_ALL + Style.BRIGHT, end="")
+    print(message, end=" ")
+    for arg in argv:
+        print(arg, end=" ")
+    print("")
+
+def ask_question(message, *argv):
+    message = Fore.BLUE + "[ ? ] " + Style.RESET_ALL + Style.BRIGHT + message
+    for arg in argv:
+        message = message + " " + arg
+    print(message, end="")
+    ret = input(": ")
+    return ret
+
+def parse_proxy_file(fpath):
+    if (path.exists(fpath) == False):
+        print("")
+        print_error("Proxy file not found! (I wonder if you're taking the wrong path?)")
+        print_error("Exiting From Program")
+        exit(0)
+    
+    proxies = []
+    with open(fpath, "r") as proxy_file:
+        for line in proxy_file.readlines():
+            line = line.replace(" ", "")
+            line = line.replace("\r", "")
+            line = line.replace("\n", "")
+            
+            if (line ==  ""):
+                continue
+            
+            proxies.append(line)
+    
+    if (len(proxies) > 50):
+        proxies = random.choices(proxies, 50)
+        
+    print("")
+    print_success(str(len(proxies)) + " Proxies have been installed!")
+
+    return proxies
 
 logo = f"""
     
