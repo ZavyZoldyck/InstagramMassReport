@@ -9,7 +9,6 @@ import request
 import requests
 
 from colorama import Fore, init
-from libs.logo import print_logo
 from libs.utils import print_success
 from libs.utils import print_error
 import time
@@ -25,6 +24,32 @@ from multiprocessing import Process
 from colorama import Fore, Back, Style
 
 init(convert=True)
+
+init(convert=True)
+
+logo = f"""
+    
+
+{Fore.LIGHTCYAN_EX} ██╗███╗   ███╗██████╗    
+{Fore.LIGHTWHITE_EX}██║████╗ ████║██╔══██╗    
+{Fore.LIGHTRED_EX}  ██║██╔████╔██║██████╔╝    
+{Fore.LIGHTCYAN_EX} ██║██║╚██╔╝██║██╔══██╗   
+{Fore.LIGHTWHITE_EX}██║██║ ╚═╝ ██║██║  ██║      
+{Fore.LIGHTRED_EX}  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝        
+                                                                                           
+                                                     
+                                                                                                              
+                                                                                                                                                                         
+
+
+      """
+
+
+
+def print_logo():
+    print(Fore.LIGHTGREEN_EX + Style.BRIGHT + logo + Style.RESET_ALL + Style.BRIGHT +"\n")
+    print(Fore.LIGHTYELLOW_EX + "                                   Developer: Martizio"+ Style.RESET_ALL + Style.BRIGHT)
+    print(Style.RESET_ALL + Style.BRIGHT, Style.BRIGHT)
 
 
 def chunks(lst, n):
