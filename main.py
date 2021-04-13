@@ -5,7 +5,6 @@ import subprocess
 
 from os import path
 import urllib
-import request
 import requests
 
 from colorama import Fore, init
