@@ -11,7 +11,7 @@ from proxybroker import Broker
 from colorama import Fore, init
 import time
 import os
-from libs.proxy_harvester import find_proxies
+
 
 from multiprocessing import Process
 from colorama import Fore, Back, Style
